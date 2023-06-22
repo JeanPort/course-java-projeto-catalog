@@ -22,21 +22,6 @@ public class CategoryService {
 	@Autowired
 	private CategoryRepository repository;
 	
-	/*
-	@Transactional(readOnly = true)
-	public List<CategoryDTO> findAll() {
-		List<Category> list = repository.findAll();
-		
-		return list.stream().map(x -> new CategoryDTO(x)).collect(Collectors.toList());
-		 Forma 2 de fazer!!
-		List<CategoryDTO> listDtos = new ArrayList<>();
-		
-		for (Category category : list) {
-			listDtos.add(new CategoryDTO(category));
-		}
-		return listDtos;
-	}
-	*/
 	@Transactional(readOnly = true)
 	public CategoryDTO findById(Long id) {
 		Optional<Category> obj = repository.findById(id);
@@ -46,7 +31,7 @@ public class CategoryService {
 	
 	@Transactional
 	public CategoryDTO insert(CategoryDTO obj) {
-		Category entity = new Category(null, obj.getName());
+		Category entity = new Category();
 		entity = repository.save(entity);
 		return new CategoryDTO(entity);
 		
